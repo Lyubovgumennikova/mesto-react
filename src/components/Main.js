@@ -1,20 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
-import api from "../utils/Api"
+import React from "react"; //, { useContext, useEffect, useState }
+// import api from "../utils/Api"
+import Card from "./Card";
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
+function Main({ onEditProfile, onAddPlace, onEditAvatar, cards}) {
   // const [userDataC, setUserDataC] = useState('');
   // const [userAvatar, setUserAvatar] = useState();
   
-useEffect(() => {
-  // const CurrentUserContext = createContext();
-  const userData = api.getUserInfo()//.then(data => {
-    // const user = props.userData;
-    console.log (userData)
-    // setUserDataC(userData)
-  //  userAvatar = data.avatar;
-  //   // userName  (data.name)
-  // })
-})
+
 // const userAvatar = userData.avatar;
 // const userData = useContext()
 // // // useContext(() => {
@@ -52,7 +44,12 @@ useEffect(() => {
           onClick={onAddPlace}
         />
       </section>
-      <section className="elements"></section>
+      <section className="elements">
+      {     
+            // cards.map(({id, ...props}) => <Card key={props._id} {...props} />) //title="name" src="link" 
+          cards.map((card) => (<Card key={card._id} card={card} />)) //title="name" src="link" 
+        } 
+      </section>
     </main>
   );
 }
