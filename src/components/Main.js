@@ -2,7 +2,7 @@ import React from "react"; //, { useContext, useEffect, useState }
 // import api from "../utils/Api"
 import Card from "./Card";
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, cards}) {
+function Main({ onEditProfile, onAddPlace, onEditAvatar, userInfoData, cards}) {
   // const [userDataC, setUserDataC] = useState('');
   // const [userAvatar, setUserAvatar] = useState();
   
@@ -27,7 +27,8 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, cards}) {
         </div>
         <div className="profile__info">
           <div className="profile__info-nik">
-            <h1 className="profile__info-name">129</h1>
+            <h1 className="profile__info-name"></h1> 
+            {/* {userInfoData.name}  */}
             <button
               aria-label="edit"
               type="button"
@@ -46,8 +47,8 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, cards}) {
       </section>
       <section className="elements">
       {     
-            // cards.map(({id, ...props}) => <Card key={props._id} {...props} />) //title="name" src="link" 
-          cards.map((card) => (<Card key={card._id} card={card} />)) //title="name" src="link" 
+            cards.map(({id, ...props}) => <Card key={props._id} {...props} />) //title="name" src="link" 
+          // cards.map((card) => (<Card key={card._id} card={card} />)) //title="name" src="link" 
         } 
       </section>
     </main>
