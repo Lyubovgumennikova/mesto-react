@@ -2,7 +2,7 @@ import React from "react"; //, { useContext, useEffect, useState }
 // import api from "../utils/Api"
 import Card from "./Card";
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, userInfoData, cards}) {
+function Main({ onEditProfile, onAddPlace, onEditAvatar, data, cards}) {
   // const [userDataC, setUserDataC] = useState('');
   // const [userAvatar, setUserAvatar] = useState();
   
@@ -16,19 +16,22 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, userInfoData, cards}) {
     <main className="page__main">
       <section className="profile">
         <div className="profile__edit">
-          <img src="#" alt="аватар" className="profile__avatar" />
+          <img className="profile__avatar" src={data.avatar}
+          // style={{ backgroundImage: `url(${data.avatar})` }}
+          alt="аватар"
+          />
           <button
             aria-label="avatar-edit"
             type="button"
             className="profile__avatar-button-edit"
             onClick={onEditAvatar}
-            // style={{ backgroundImage: `url(${userAvatar})` }}
+            
           />
         </div>
         <div className="profile__info">
           <div className="profile__info-nik">
-            <h1 className="profile__info-name"></h1> 
-            {/* {userInfoData.name}  */}
+            <h1 className="profile__info-name">{data.name} </h1> 
+            
             <button
               aria-label="edit"
               type="button"
@@ -36,7 +39,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, userInfoData, cards}) {
               onClick={onEditProfile}
             />
           </div>
-          <p className="profile__info-job">Исследователь океана</p>
+          <p className="profile__info-job">{data.about}</p>
         </div>
         <button
           aria-label="add"

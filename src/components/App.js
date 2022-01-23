@@ -14,20 +14,20 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState();
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState();
-  // const [userInfoData, setUserInfoData] = useState([]);
+  const [userInfoData, setUserInfoData] = useState([]);
   const [cards, setCards] = useState([]);
   // const [selectedCard, setSelectedCard] = React.useState(false);
   // const [isImagePopupOpen, setImagePopupOpen] = React.useState(false);
 
   useEffect(() => {
-    // const userInfoData = [api.getUserInfo(), api.getInitialCards()];
-    // Promise.all(userInfoData).then(([userData, items]) => {
-    //   setCards(items); 
-    //   setUserInfoData(userData)
-    // })
-    api.getInitialCards().then(data => {
-      setCards(data); 
+    const userInfoData = [api.getUserInfo(), api.getInitialCards()];
+    Promise.all(userInfoData).then(([userData, items]) => {
+      setCards(items); 
+      setUserInfoData(userData)
     })
+    // api.getInitialCards().then(data => {
+    //   setCards(data); 
+    // })
   }, [])
 
   
@@ -68,7 +68,7 @@ function App() {
         onEditAvatar={handleEditAvatarClick}
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
-        // data={userInfoData}
+        data={userInfoData}
         // onCardClick={handleCardClick}
         cards={cards}
       />
