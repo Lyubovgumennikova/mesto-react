@@ -16,17 +16,18 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, data, cards}) {
     <main className="page__main">
       <section className="profile">
         <div className="profile__edit">
-          <img className="profile__avatar" src={data.avatar}
-          // style={{ backgroundImage: `url(${data.avatar})` }}
+          <div className="profile__avatar profile__avatar-button-edit" //src={data.avatar} 
+          style={{ backgroundImage: `url(${data.avatar})` }}
           alt="аватар"
+          onClick={onEditAvatar}
           />
-          <button
+          {/* <button
             aria-label="avatar-edit"
             type="button"
             className="profile__avatar-button-edit"
             onClick={onEditAvatar}
             
-          />
+          /> */}
         </div>
         <div className="profile__info">
           <div className="profile__info-nik">
