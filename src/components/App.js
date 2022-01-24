@@ -1,28 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import Input from "./Input";
-import api from "../utils/Api";
+// import api from "../utils/Api";
 import ImagePopup from "./ImagePopup";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState();
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState();
-  const [userInfoData, setUserInfoData] = useState([]);
-  const [cards, setCards] = useState([]);
-  const [selectedCard, setSelectedCard] = React.useState(false);
-  const [isImagePopupOpen, setImagePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState({name: '', link: ''});
+  const [isImagePopupOpen, setImagePopupOpen] = useState(false);
 
-  useEffect(() => {
-    const userData = [api.getUserInfo(), api.getInitialCards()];
-    Promise.all(userData).then(([userData, items]) => {
-      setCards(items);
-      setUserInfoData(userData);
-    });
-  }, []);
+  
 
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
@@ -46,7 +38,7 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    setSelectedCard(false);
+    setSelectedCard({name: '', link: ''});
     setImagePopupOpen(false);
   };
 
@@ -57,16 +49,17 @@ function App() {
         onEditAvatar={handleEditAvatarClick}
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
-        data={userInfoData}
+        // data={userInfoData}
         // onCardClick={onCardClick}
         onCardClick={handleCardClick}
-        cards={cards}
+        // cards={cards}
       />
 
       <Footer />
       <PopupWithForm
         name="edit"
         title="Редактировать профиль"
+        buttonText="Сохранить"
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
       >
@@ -78,6 +71,7 @@ function App() {
       <PopupWithForm
         name="new-card"
         title="Новое место"
+        buttonText="Добавить"
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
       >
@@ -89,6 +83,7 @@ function App() {
       <PopupWithForm
         name="avatar"
         title="Обновить аватар"
+        buttonText="Сохранить"
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
       >
@@ -99,6 +94,7 @@ function App() {
       <PopupWithForm
         name="delete"
         title="Вы уверены?"
+        buttonText="Да"
         onClose={closeAllPopups}
       />
 

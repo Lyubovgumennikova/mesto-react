@@ -11,9 +11,8 @@ function Card({ card, onCardClick }) {
         type="button"
         className="element__remove-button"
       ></button>
-      <div
-        className="element__mask-group" //src={card.link}
-        style={{ backgroundImage: `url(${card.link})` }}
+      <img
+        className="element__mask-group" src={card.link}
         alt={card.name}
         onClick={handleClick}
       />

@@ -4,7 +4,7 @@ function ImagePopup({ card, onClose, onCardClick }) {
   return (
     <div
       className={`${
-        onCardClick
+        onCardClick && card.link
           ? `popup popup_type_image popup_opened`
           : `popup popup_type_image `
       }`}
@@ -16,13 +16,13 @@ function ImagePopup({ card, onClose, onCardClick }) {
           className="popup__close popup__close_type_image"
           onClick={onClose}
         />
-        <form name="image" className="popup__content-image">
+        <figure name="image" className="popup__content-image">
           <img className="popup__mask-group" src={card.link} alt={card.name} />
-          <h2 className="popup__text-image">{card.name} </h2>
-        </form>
+          <figcaption className="popup__text-image">{card.name} </figcaption>
+        </figure>
       </div>
     </div>
   );
 }
-
+// ImagePopup.propTypes = {card.link};
 export default ImagePopup;
