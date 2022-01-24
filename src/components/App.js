@@ -5,8 +5,8 @@ import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import Input from "./Input";
 import api from "../utils/Api";
-// import ImagePopup from './ImagePopup';
-import Card from './Card';
+import ImagePopup from './ImagePopup';
+// import Card from './Card';
 
 // import './index.css';
 
@@ -16,12 +16,13 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState();
   const [userInfoData, setUserInfoData] = useState([]);
   const [cards, setCards] = useState([]);
-  // const [selectedCard, setSelectedCard] = React.useState(false);
-  // const [isImagePopupOpen, setImagePopupOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState(false);
+  const [isImagePopupOpen, setImagePopupOpen] = React.useState(false);
+ 
 
   useEffect(() => {
-    const userInfoData = [api.getUserInfo(), api.getInitialCards()];
-    Promise.all(userInfoData).then(([userData, items]) => {
+    const userData = [api.getUserInfo(), api.getInitialCards()];
+    Promise.all(userData).then(([userData, items]) => {
       setCards(items); 
       setUserInfoData(userData)
     })
@@ -45,18 +46,18 @@ function App() {
     setIsAddPlacePopupOpen(true);
   };
 
-  // const handleCardClick = (card) => {
-  //   setImagePopupOpen(true);
-  //   setSelectedCard(card);
-  // };
+  const handleCardClick = (card) => {
+    setImagePopupOpen(true);
+    setSelectedCard(card);
+  };
 
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     // setDeletePopupOpen(false);
-    // setSelectedCard(false);
-    // setImagePopupOpen(false);
+    setSelectedCard(false);
+    setImagePopupOpen(false);
   };
 
 
@@ -69,8 +70,9 @@ function App() {
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
         data={userInfoData}
-        // onCardClick={handleCardClick}
-        cards={cards}
+        // onCardClick={onCardClick}
+        onCardClick={handleCardClick}
+        cards= {cards}
       />
       {/* <div className="card-template">
       {/* <article className="element"></article> */}
@@ -91,14 +93,14 @@ function App() {
         <Input
           type="text"
           name="nik"
-          placeholder="Жак-Ив Кусто"
+          placeholder="Имя"
           maxLength="40"
         />
         <span id="nik-error" className="popup__input-error"></span>
         <Input
           type="text"
           name="job"
-          placeholder="Исследователь океана"
+          placeholder="Занятие"
           maxLength="200"
         />
         <span id="job-error" className="popup__input-error"></span>
@@ -130,9 +132,12 @@ function App() {
         onClose={closeAllPopups}
       />
        
-      {/* <ImagePopup isOpen={isImagePopupOpen}
+      <ImagePopup 
+      onCardClick={isImagePopupOpen}
+      
         onClose={closeAllPopups} 
-        card={selectedCard} /> */}
+        card={selectedCard} 
+        />
     </div>
 
     // </div>
