@@ -1,38 +1,28 @@
-import React from "react"; //, { useContext, useEffect, useState }
-// import api from "../utils/Api"
+import React from "react";
 import Card from "./Card";
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, data, cards, onCardClick}) {
-  // const [userDataC, setUserDataC] = useState('');
-  // const [userAvatar, setUserAvatar] = useState();
-  
-
-// const userAvatar = userData.avatar;
-// const userData = useContext()
-// // // useContext(() => {
-  // console.log (user)
-//  }, [])
+function Main({
+  onEditProfile,
+  onAddPlace,
+  onEditAvatar,
+  data,
+  cards,
+  onCardClick,
+}) {
   return (
     <main className="page__main">
       <section className="profile">
         <div className="profile__edit">
-          <div className="profile__avatar profile__avatar-button-edit" //src={data.avatar} 
-          style={{ backgroundImage: `url(${data.avatar})` }}
-          alt="аватар"
-          onClick={onEditAvatar}
-          />
-          {/* <button
-            aria-label="avatar-edit"
-            type="button"
-            className="profile__avatar-button-edit"
+          <div
+            className="profile__avatar profile__avatar-button-edit" //src={data.avatar}
+            style={{ backgroundImage: `url(${data.avatar})` }}
+            alt="аватар"
             onClick={onEditAvatar}
-            
-          /> */}
+          />
         </div>
         <div className="profile__info">
           <div className="profile__info-nik">
-            <h1 className="profile__info-name">{data.name} </h1> 
-            
+            <h1 className="profile__info-name">{data.name} </h1>
             <button
               aria-label="edit"
               type="button"
@@ -50,10 +40,12 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, data, cards, onCardClic
         />
       </section>
       <section className="elements">
-      {     
-            // cards.map(({id, ...props}) => <Card key={props._id} {...props} />) //title="name" src="link" 
-          cards.map((card) => (<Card key={card._id} card={card} onCardClick={onCardClick}/>)) //title="name" src="link" 
-        } 
+        {
+          // cards.map(({id, ...props}) => <Card key={props._id} {...props} />) //title="name" src="link"
+          cards.map((card) => (
+            <Card key={card._id} card={card} onCardClick={onCardClick} />
+          ))
+        }
       </section>
     </main>
   );

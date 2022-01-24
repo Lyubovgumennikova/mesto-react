@@ -1,13 +1,14 @@
 import React from "react";
 
-function ImagePopup({card, onClose, onCardClick}) {
+function ImagePopup({ card, onClose, onCardClick }) {
   return (
-    <div 
-    className = {`${  //"popup popup_type_image "
-      onCardClick
-        ? `popup popup_type_image popup_opened`
-        : `popup popup_type_image `}`}
-     >
+    <div
+      className={`${
+        onCardClick
+          ? `popup popup_type_image popup_opened`
+          : `popup popup_type_image `
+      }`}
+    >
       <div className="popup__image">
         <button
           aria-label="cloce"
@@ -17,7 +18,7 @@ function ImagePopup({card, onClose, onCardClick}) {
         />
         <form name="image" className="popup__content-image">
           <img className="popup__mask-group" src={card.link} alt={card.name} />
-          <h2 className="popup__text-image">{card.name} </h2> 
+          <h2 className="popup__text-image">{card.name} </h2>
         </form>
       </div>
     </div>
