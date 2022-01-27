@@ -1,28 +1,15 @@
 import React from "react";
+import Popup from "./Popup";
 
-function ImagePopup({ card, onClose, onCardClick }) {
+function ImagePopup({ card, onClose, onCardClick, name }) {
   return (
-    <div
-      className={`${
-        onCardClick && card.link
-          ? `popup popup_type_image popup_opened`
-          : `popup popup_type_image `
-      }`}
-    >
-      <div className="popup__image">
-        <button
-          aria-label="cloce"
-          type="button"
-          className="popup__close popup__close_type_image"
-          onClick={onClose}
-        />
-        <figure name="image" className="popup__content-image">
-          <img className="popup__mask-group" src={card.link} alt={card.name} />
-          <figcaption className="popup__text-image">{card.name} </figcaption>
-        </figure>
-      </div>
-    </div>
+    <Popup isOpen={onCardClick} name={name} onClose={onClose}>
+      <figure name="image" className="popup__content-image">
+        <img className="popup__mask-group" src={card.link} alt={card.name} />
+        <figcaption className="popup__text-image">{card.name} </figcaption>
+      </figure>
+    </Popup>
   );
 }
-// ImagePopup.propTypes = {card.link};
+
 export default ImagePopup;

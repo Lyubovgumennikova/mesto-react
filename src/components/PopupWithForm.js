@@ -1,51 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
+import Popup from "./Popup";
 
-function PopupWithForm({ name, title, children, isOpen, onClose , buttonText}) {
-  
-  const handleEscClose = (evt) => {
-    if (evt.key === "Escape") {
-      onClose();
-    }
-  };
-  
-  useEffect(() => {
-    document.addEventListener("keyup", handleEscClose, false);
-
-    return () => {
-      document.removeEventListener("keyup", handleEscClose, false);
-    };
-  }, );
-
-  const handleOverlayClose = (evt) => {
-    if (evt.target === evt.currentTarget && isOpen) {
-      onClose();
-    }
-  };
-
+function PopupWithForm({ name, title, children, isOpen, onClose, buttonText }) {
   return (
-    <div
-      className={`${
-        isOpen
-          ? `popup popup_type_${name} popup_opened`
-          : `popup popup_type_${name}`
-      }`}
-      onMouseUp={handleOverlayClose}
-    >
-      <button
-        className="popup__close popup__close_type_edit"
-        onClick={onClose}
-      />
-      <div className="popup__container">
-        <h2 className="popup__text">{title}</h2>
-        <form name={name} className="popup__content" >
-          {children}
-          <button type="submit" className="popup__submit-button">
-            {buttonText}
-          </button>
-          )
-        </form>
-      </div>
-    </div>
+    <Popup isOpen={isOpen} name={name} onClose={onClose}>
+      <h2 className="popup__text">{title}</h2>
+      <form name={name} className="popup__content">
+        {children}
+        <button type="submit" className="popup__submit-button">
+          {buttonText}
+        </button>
+        )
+      </form>
+    </Popup>
   );
 }
 

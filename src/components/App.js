@@ -102,6 +102,7 @@ function App() {
         onCardClick={isImagePopupOpen}
         onClose={closeAllPopups}
         card={selectedCard}
+        name="image"
       />
     </div>
   );
