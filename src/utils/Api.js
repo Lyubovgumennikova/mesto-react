@@ -32,7 +32,7 @@ class Api {
     }
 
     deleteCard(data) { // •	удалить карточку (DELETE)
-        return fetch(`${this._url}cards/${data._cardId}`, {
+        return fetch(`${this._url}cards/${data}`, {
             method: "DELETE",
             headers: this._headers,
             
@@ -76,6 +76,16 @@ class Api {
             
         }).then((res) => this._errorHandler(res));
     }
+
+    changeLikeCardStatus(data, isLiked) { // •	“залайкать” карточку 
+        const promise = !isLiked
+        return fetch(`${this._url}cards/${data}/likes`, {
+            method: promise ? 'DELETE' : 'PUT',
+            headers: this._headers,
+            
+        }).then((res) => this._errorHandler(res));
+    }
+    
 
     deleteCardLike(data) { // •	удалить лайк карточки (DELETE)
         return fetch(`${this._url}cards/${data._cardId}/likes`, {
