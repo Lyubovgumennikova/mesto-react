@@ -6,7 +6,7 @@ import Input from "./Input";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import Form from "./Form";
 
-function EditProfilePopup({ isOpen, onClose}) {
+function EditProfilePopup({ isOpen, onClose, onUpdateUser}) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const currentUser = React.useContext(CurrentUserContext);
@@ -24,16 +24,16 @@ function EditProfilePopup({ isOpen, onClose}) {
     setDescription(e.target.value);
   }
 
-  // function handleSubmit(e) {
-  //   // Запрещаем браузеру переходить по адресу формы
-  //   e.preventDefault();
+  function handleSubmit(e) {
+    // Запрещаем браузеру переходить по адресу формы
+    e.preventDefault();
 
-  //   // Передаём значения управляемых компонентов во внешний обработчик
-  //   onUpdateUser({
-  //     name,
-  //     about: description,
-  //   });
-  // }
+    // Передаём значения управляемых компонентов во внешний обработчик
+    onUpdateUser({
+      name,
+      about: description,
+    });
+  }
 
   return (
     <PopupWithForm
@@ -42,17 +42,17 @@ function EditProfilePopup({ isOpen, onClose}) {
       buttonText="Сохранить"
       isOpen={isOpen}
       onClose={onClose}
-
-     
       // onUpdateUser={handleUpdateUser}
+     
+      
     >
-      <Form name="edit" buttonText="Сохранить">
+      <Form name="edit" buttonText="Сохранить" onSubmit={handleSubmit}>
         <Input
           type="text"
           name="nik"
           placeholder="Имя"
           maxLength="40"
-          // value={  name}
+          value={ name}
           onChange={handleNameChange}
         />
         <span id="nik-error" className="popup__input-error"></span>

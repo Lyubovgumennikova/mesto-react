@@ -48,13 +48,13 @@ class Api {
         });
     }
 
-    editProfile(data) {// •	заменить данные пользователя (PATCH)
+    setUserInfo(data) {// •	заменить данные пользователя (PATCH)
         return fetch(`${this._url}users/me`, {
             method: "PATCH",
             headers: this._headers,
             body: JSON.stringify({
-                name: data.nik,
-                about: data.job,
+                name: data.name,
+                about: data.about,
             }),
         }).then((res) => this._errorHandler(res));
     }

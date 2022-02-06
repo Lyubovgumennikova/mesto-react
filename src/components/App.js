@@ -55,8 +55,7 @@ function App() {
 
   const handleUpdateUser = (userInfo) => {
     // setIsLoading(true);
-    api
-      .setUserInfo(userInfo)
+    api.setUserInfo(userInfo)
       .then((userData) => {
         setCurrentUser(userData);
         closeAllPopups();
@@ -87,7 +86,7 @@ function App() {
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
-          // onUpdateUser={handleUpdateUser}
+          onUpdateUser={handleUpdateUser}
         />
         {/* <PopupWithForm
           name="edit"
