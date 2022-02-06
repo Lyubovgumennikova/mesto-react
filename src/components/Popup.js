@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 const Popup = ({ name, children, isOpen, onClose }) => {
   useEffect(() => {
-    if (isOpen) return;
+    if (!isOpen) return;
 
     const handleEscClose = (evt) => {
       if (evt.key === "Escape") {
@@ -25,12 +25,8 @@ const Popup = ({ name, children, isOpen, onClose }) => {
 
   return (
     <div
-      className={`${
-        isOpen
-          ? `popup popup_type_${name} popup_opened`
-          : `popup popup_type_${name}`
-      }`}
-      onClick={handleOverlayClose}
+    className={`popup ${isOpen ? "popup_opened" : ""} popup_type_${name}`}
+    onClick={handleOverlayClose}
     >
       <div
         className={`${
