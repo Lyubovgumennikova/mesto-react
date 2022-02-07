@@ -1,18 +1,10 @@
 import React from "react";
-// import Form from "./Form";
 import Popup from "./Popup";
 
-
-function PopupWithForm({
-  name,
-  title,
-  children,
-  isOpen,
-  onClose,
-}) {
+function PopupWithForm({ children, isOpen, onClose, ...props }) {
   return (
-    <Popup isOpen={isOpen} name={name} onClose={onClose}>
-      <h2 className="popup__text">{title}</h2>
+    <Popup isOpen={isOpen} name={props.name} onClose={onClose}>
+      <h2 className="popup__text">{props.title}</h2>
       {children}
     </Popup>
   );

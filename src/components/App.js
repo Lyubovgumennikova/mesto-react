@@ -9,6 +9,7 @@ import ImagePopup from "./ImagePopup";
 import EditProfilePopup from "./EditProfilePopup";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import Form from "./Form";
+import EditAvatarPopup from "./EditAvatarPopup";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -64,6 +65,21 @@ function App() {
         console.log(`${err}`);
       })
       .finally(() => {
+        // renderLoading(false);
+      });
+  };
+
+  const handleUpdateAvatar = (inputValue) => {
+    // setIsLoading(true);
+    api.setUserAvatar(inputValue)
+      .then((avatar) => {
+        setCurrentUser(avatar);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(`${err}`);
+      })
+      .finally(() => {
         // setIsLoading(false);
       });
   };
@@ -84,38 +100,13 @@ function App() {
 
         <Footer />
         <EditProfilePopup
+        // name="edit"
+        // title="Редактировать профиль"
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
         />
-        {/* <PopupWithForm
-          name="edit"
-          title="Редактировать профиль"
-          buttonText="Сохранить"
-          isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}
-        >
-          <Form name="edit" buttonText="Сохранить">
-      <Input
-        type="text"
-        name="nik"
-        placeholder="Имя"
-        maxLength="40"
-        // value={name}
-        // onChange={handleNameChange}
-      />
-      <span id="nik-error" className="popup__input-error"></span>
-      <Input
-        type="text"
-        name="job"
-        placeholder="Занятие"
-        maxLength="200"
-        // value={description}
-        // onChange={handleDescriptionChange}
-      />
-      <span id="job-error" className="popup__input-error"></span>
-      </Form>
-        </PopupWithForm> */}
+    
         <PopupWithForm
           name="new-card"
           title="Новое место"
@@ -135,23 +126,8 @@ function App() {
             <span id="link-error" className="popup__input-error"></span>
           </Form>
         </PopupWithForm>
-        <PopupWithForm
-          name="avatar"
-          title="Обновить аватар"
-          
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-        >
-          <Form name="avatar" buttonText="Сохранить">
-            <Input
-              type="url"
-              name="avatar"
-              placeholder="Ссылка на изображение"
-            />
-
-            <span id="avatar-error" className="popup__input-error"></span>
-          </Form>
-        </PopupWithForm>
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}
+        onUpdateAvatar={handleUpdateAvatar}  /> 
         <PopupWithForm
           name="delete"
           title="Вы уверены?"

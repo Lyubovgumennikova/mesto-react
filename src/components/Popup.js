@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-const Popup = ({ name, children, isOpen, onClose }) => {
+const Popup = ({isOpen, onClose, name, children }) => {
   useEffect(() => {
     if (!isOpen) return;
 

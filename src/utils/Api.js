@@ -59,7 +59,7 @@ class Api {
         }).then((res) => this._errorHandler(res));
     }
 
-    editAvatar(data) {  // •	заменить аватар (PATCH)
+    setUserAvatar(data) {  // •	заменить аватар (PATCH)
         return fetch(`${this._url}users/me/avatar`, {
             method: "PATCH",
             headers: this._headers,
