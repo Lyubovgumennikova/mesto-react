@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-// import Popup from "./Popup";
 import PopupWithForm from "./PopupWithForm";
-import Input from "./Input";
-
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import Form from "./Form";
+import Input from "./Input";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-function EditProfilePopup({ isOpen, onClose, onUpdateUser, ...props}) {
+function EditProfilePopup({ isOpen, onClose, onUpdateUser, ...props }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
@@ -17,18 +15,18 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, ...props}) {
     setDescription(currentUser.about);
   }, [currentUser]);
 
-  function handleNameChange(e) {
-    setName(e.target.value);
-  }
+  // function handleNameChange(e) {
+  //   setName(e.target.value);
+  // }
 
-  function handleDescriptionChange(e) {
-    setDescription(e.target.value);
-  }
+  // function handleDescriptionChange(e) {
+  //   setDescription(e.target.value);
+  // }
 
   function handleSubmit(e) {
     // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
-
+    // setIsLoading(true)
     // Передаём значения управляемых компонентов во внешний обработчик
     onUpdateUser({
       name,
@@ -40,12 +38,9 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, ...props}) {
     <PopupWithForm
       name="edit"
       title="Редактировать профиль"
-      buttonText="Сохранить"
       isOpen={isOpen}
       onClose={onClose}
       // onUpdateUser={handleUpdateUser}
-     
-      
     >
       <Form name="edit" buttonText="Сохранить" onSubmit={handleSubmit}>
         <Input
@@ -54,7 +49,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, ...props}) {
           placeholder="Имя"
           maxLength="40"
           // value={ name}
-          onChange={handleNameChange}
+          handleChange={setName}
         />
         <span id="nik-error" className="popup__input-error"></span>
         <Input
@@ -63,7 +58,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, ...props}) {
           placeholder="Занятие"
           maxLength="200"
           // defaultValue={description}
-          onChange={handleDescriptionChange}
+          handleChange={setDescription}
         />
         <span id="job-error" className="popup__input-error"></span>
       </Form>

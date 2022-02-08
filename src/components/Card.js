@@ -2,6 +2,7 @@ import React from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function Card({ card, onCardClick, onCardLike, onCardDelete }) {
+  
   const currentUser = React.useContext(CurrentUserContext);
   const isOwn = card.owner._id === currentUser._id;
   // Создаём переменную, которую после зададим в `className` для кнопки удаления
@@ -13,15 +14,13 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
 
   // Создаём переменную, которую после зададим в `className` для кнопки лайка
   const cardLikeButtonClassName = `${
-    isLiked
-      ? `element__vector element__vector_active`
-      : `element__vector `
+    isLiked ? `element__vector element__vector_active` : `element__vector `
   }`;
 
   const handleDeleteClick = () => {
     onCardDelete(card);
   };
- 
+
   const handleLikeClick = () => {
     onCardLike(card);
   };
@@ -29,6 +28,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   const handleClick = () => {
     onCardClick(card);
   };
+
   return (
     <article className="element">
       <button
@@ -46,7 +46,12 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
       <div className="element__rectangle">
         <h3 className="element__text">{card.name}</h3>
         <div className="element__like-container">
-          <button aria-label="like" type="button" className={cardLikeButtonClassName} onClick={handleLikeClick} />
+          <button
+            aria-label="like"
+            type="button"
+            className={cardLikeButtonClassName}
+            onClick={handleLikeClick}
+          />
           <span className="element__vector-container">{card.likes.length}</span>
         </div>
       </div>
