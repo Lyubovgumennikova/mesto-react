@@ -22,20 +22,53 @@ function App() {
   // const [searchQuery, setSearchQuery] = useState([]);  поисковик
   // const [inputValue,setInputValue] = useState("");  //инпуты
   const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [inputValue, setInputValue] = React.useState("");
 
-  useEffect(() => {
-    api
-      .getUserInfo()
+  // useEffect(() => {
+  //   api
+  //     .getUserInfo()
 
-      .then((userData) => {
-        setCurrentUser(userData);
-      });
-  }, []);
+  //     .then((userData) => {
+  //       setCurrentUser(userData);
+  //     });
+  // }, []);
 
-  const handleEditAvatarClick = () => {
+  // useEffect(() => {
+  //   // if (isLoading) {
+
+  //   // }
+  //   api
+  //     .getInitialCards()
+  //     .then((items) => {
+  //       setCards(items);
+  //     })
+  //     .catch((err) => console.log(err))
+  //     .finally(() => {
+  //       // popupInfo.renderLoading(false);
+  //       // renderLoading(popupDeleteCardElement, false);
+  //     });
+  // }, []);
+
+  
+    const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
     // setIsEditAvatarPopupOpen(true)
   };
+
+
+  useEffect(() => {
+    const userData = [api.getUserInfo(), api.getInitialCards()]; 
+    Promise.all(userData).then(([userData, items]) => { 
+      setCards(items); 
+      // setUserInfoData(userData); 
+      setCurrentUser(userData);
+    }).catch((err) => console.log(err))
+    .finally(() => {
+      // popupInfo.renderLoading(false);
+      // renderLoading(popupDeleteCardElement, false);
+    });
+  }, []);
 
   const handleEditProfileClick = () => {
     setIsEditProfilePopupOpen(true);
@@ -73,13 +106,14 @@ function App() {
         closeAllPopups();
       })
       //   setIsLoading(false);
-      //   setInputValue('')
+        // setInputValue('')
       // }
 
       .catch((err) => {
         console.log(`${err}`);
       })
       .finally(() => {
+        setIsSubmitted(false);
         // renderLoading(false);
       });
   };
@@ -89,13 +123,14 @@ function App() {
     api
       .setUserAvatar(inputValue)
       .then((avatar) => {
-        setCurrentUser(avatar.value);
+        setCurrentUser(avatar);
         closeAllPopups();
       })
       .catch((err) => {
         console.log(`${err}`);
       })
       .finally(() => {
+        setInputValue('')
         setIsLoading(false);
       });
   };
@@ -111,25 +146,12 @@ function App() {
         console.log(`${err}`);
       })
       .finally(() => {
+        // setInputValue('')
         // setIsLoading(false);
       });
   };
 
-  useEffect(() => {
-    // if (isLoading) {
-
-    // }
-    api
-      .getInitialCards()
-      .then((items) => {
-        setCards(items);
-      })
-      .catch((err) => console.log(err))
-      .finally(() => {
-        // popupInfo.renderLoading(false);
-        // renderLoading(popupDeleteCardElement, false);
-      });
-  }, []);
+  
 
   function handleCardDelete(data) {
     api
@@ -175,19 +197,20 @@ function App() {
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
-          isLoading={isLoading}
+          // isLoading={isLoading}
         />
 
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
-          isLoading={isLoading}
+          // isLoading={isLoading}
         />
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
+          isSubmitted={isSubmitted}
           isLoading={isLoading}
         />
         <DeleteCardPopup
@@ -195,7 +218,7 @@ function App() {
           card={selectedCard}
           onCardDelete={handleCardDelete}
           onClose={closeAllPopups}
-          isLoading={isLoading}
+          // isLoading={isLoading}
         />
 
         <ImagePopup

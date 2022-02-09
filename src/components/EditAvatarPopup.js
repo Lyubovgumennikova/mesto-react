@@ -6,10 +6,11 @@ import Input from "./Input";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import Form from "./Form";
 
-function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar,ref }) {
-  const [inputValue, setInputValue] = useState("");
-  const avatar = ["avatar"];
-
+function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, setCurrentUser }) {
+  // const [value, setValue] = useState(""); 
+  const [avatar, setAvatar] = useState("");
+  // const avatar = ["profile__avatar"];
+  // const avatarInputRef = React.forwardRef()
   const avatarInputRef = useRef(null);
   // const currentUser = useContext(CurrentUserContext);
   // const testRef = { current: avatarInputRef.current };
@@ -18,14 +19,25 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar,ref }) {
     e.preventDefault();
 
     onUpdateAvatar({
-      avatar: avatarInputRef.current.value,
+      avatar: {value: avatarInputRef.current.value}
 
       // setInputValue ({avatar: avatarInputRef.current.value}) /* Значение инпута, полученное с помощью рефа */,
     });
-    // console.log(avatar)
+    // // console.log(avatar)
   };
   useEffect(() => {
-    setInputValue('');
+    // onUpdateAvatar(avatarInputRef);
+    // return () => {};
+    // setAvatar(() => {
+    //   avatarInputRef.current = {avatar}
+    // }) 
+    const data = ["avatar"];
+    setAvatar(data.avatar)
+    
+    // setCurrentUser(currentUser.avatar)
+    // ref={avatarInputRef}
+    // setAvatar(avatarInputRef)
+    // setValue('');
   }, [isOpen]);
 
   // function handleAvatarChange(e) {
@@ -40,16 +52,17 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar,ref }) {
       onClose={onClose}
     >
       <Form name="avatar" buttonText="Сохранить" onSubmit={handleSubmit}>
+        
         <Input
-          ref={avatar}
+          // ref={avatarInputRef}
           type="url"
           name="avatar"
           placeholder="Ссылка на изображение"
-          // onChange={handleAvatarChange}
+          // handleChange={handleSubmit}
           
-          // value={searchQuery}
-           value={inputValue.avatar}
-          handleChange={setInputValue}
+          // value={value}
+          //  value={avatar}
+          handleChange={setAvatar }
         />
 
         <span id="avatar-error" className="popup__input-error"></span>

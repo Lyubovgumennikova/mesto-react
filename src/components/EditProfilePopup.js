@@ -4,7 +4,7 @@ import Form from "./Form";
 import Input from "./Input";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-function EditProfilePopup({ isOpen, onClose, onUpdateUser, ...props }) {
+function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
@@ -48,7 +48,8 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, ...props }) {
           name="nik"
           placeholder="Имя"
           maxLength="40"
-          // value={ name}
+          value={ name || ''}
+          // value={currentUser.name}
           handleChange={setName}
         />
         <span id="nik-error" className="popup__input-error"></span>
@@ -57,7 +58,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, ...props }) {
           name="job"
           placeholder="Занятие"
           maxLength="200"
-          // defaultValue={description}
+          value={description || ''}
           handleChange={setDescription}
         />
         <span id="job-error" className="popup__input-error"></span>

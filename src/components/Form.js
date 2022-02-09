@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState }  from "react";
 
-function Form({children,buttonText,handleSubmit, onSubmit, isLoading, ...props }) {
+function Form({children,buttonText,handleSubmit, isSubmitted, isLoading, onSubmit, ...props }) {
+  // const [isSubmitted, setIsSubmitted] = useState(false);
   // function handleSubmit(e) {
   //   // Запрещаем браузеру переходить по адресу формы
   //   e.preventDefault();
@@ -17,11 +18,14 @@ function Form({children,buttonText,handleSubmit, onSubmit, isLoading, ...props }
     <form name={props.name} className="popup__content" onSubmit={onSubmit} > 
       {children}
       <button type="submit" className="popup__submit-button">
-      {`${
-          isLoading
-            ? `Выполняется...`
-            : buttonText
-        }`}
+      {/* {`${isSubmitted ? `Выполняется...`: buttonText}`} */}
+      {
+  isLoading //isSubmitted 
+  ? 'Выполняется...'
+   : buttonText
+    
+      }
+        
        </button>
       )
     </form>
@@ -29,3 +33,5 @@ function Form({children,buttonText,handleSubmit, onSubmit, isLoading, ...props }
 }
 
 export default Form;
+
+// {`${!isLoading ? `Выполняется...`: buttonText}`}
