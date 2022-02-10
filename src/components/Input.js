@@ -1,6 +1,6 @@
 import React from "react";
 
-function Input ({ type, placeholder, name, maxLength, value, handleChange}) {
+function Input ({ type, placeholder, name, maxLength, handleChange, ...props}) {
   return (
     <input
       type={type}
@@ -11,8 +11,8 @@ function Input ({ type, placeholder, name, maxLength, value, handleChange}) {
       maxLength={maxLength}
       // onChange={onChange}
       onChange={e => handleChange(e.target.value)}
-      value={value}
-      // ref={ref}
+      value={props.value}
+      ref={props.ref}
       required
     />
   );

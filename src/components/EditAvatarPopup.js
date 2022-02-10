@@ -19,7 +19,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, setCurrentUser }) {
     e.preventDefault();
 
     onUpdateAvatar({
-      avatar: {value: avatarInputRef.current.value}
+      avatar //: avatarInputRef.current//avatarInputRef.current.value //: avatarInputRef.current}
 
       // setInputValue ({avatar: avatarInputRef.current.value}) /* Значение инпута, полученное с помощью рефа */,
     });
@@ -54,11 +54,11 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, setCurrentUser }) {
       <Form name="avatar" buttonText="Сохранить" onSubmit={handleSubmit}>
         
         <Input
-          // ref={avatarInputRef}
+          // ref={avatarInputRef.value}
           type="url"
           name="avatar"
           placeholder="Ссылка на изображение"
-          // handleChange={handleSubmit}
+          // handleChange={onUpdateAvatar}
           
           // value={value}
           //  value={avatar}
