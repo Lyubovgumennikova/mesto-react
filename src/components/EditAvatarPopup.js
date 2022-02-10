@@ -6,20 +6,21 @@ import Input from "./Input";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import Form from "./Form";
 
-function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, setCurrentUser }) {
+function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, setIsSubmitted, setCurrentUser }) {
   // const [value, setValue] = useState(""); 
   const [avatar, setAvatar] = useState("");
-  // const avatar = ["profile__avatar"];
+//  avatar = ["profile__avatar"];
   // const avatarInputRef = React.forwardRef()
+  // const data = ["avatar"];
   const avatarInputRef = useRef(null);
   // const currentUser = useContext(CurrentUserContext);
   // const testRef = { current: avatarInputRef.current };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    setIsSubmitted(true);
     onUpdateAvatar({
-      avatar //: avatarInputRef.current//avatarInputRef.current.value //: avatarInputRef.current}
+      avatar: avatarInputRef.current.value //avatarInputRef.current.value //: avatarInputRef.current}
 
       // setInputValue ({avatar: avatarInputRef.current.value}) /* Значение инпута, полученное с помощью рефа */,
     });
@@ -31,12 +32,12 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, setCurrentUser }) {
     // setAvatar(() => {
     //   avatarInputRef.current = {avatar}
     // }) 
-    const data = ["avatar"];
-    setAvatar(data.avatar)
+    // const data = ["avatar"];
+    // setAvatar(data.avatar)
     
     // setCurrentUser(currentUser.avatar)
     // ref={avatarInputRef}
-    // setAvatar(avatarInputRef)
+    setAvatar(avatarInputRef)
     // setValue('');
   }, [isOpen]);
 
@@ -54,7 +55,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, setCurrentUser }) {
       <Form name="avatar" buttonText="Сохранить" onSubmit={handleSubmit}>
         
         <Input
-          // ref={avatarInputRef.value}
+          inputRef={avatarInputRef}
           type="url"
           name="avatar"
           placeholder="Ссылка на изображение"

@@ -12,7 +12,7 @@ function Input ({ type, placeholder, name, maxLength, handleChange, ...props}) {
       // onChange={onChange}
       onChange={e => handleChange(e.target.value)}
       value={props.value}
-      ref={props.ref}
+      ref={props.inputRef}
       required
     />
   );

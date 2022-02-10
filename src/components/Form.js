@@ -20,7 +20,7 @@ function Form({name, children,buttonText,handleSubmit, isSubmitted, isLoading, o
       <button type="submit" className="popup__submit-button">
       {/* {`${isSubmitted ? `Выполняется...`: buttonText}`} */}
       {
-  isLoading //isSubmitted 
+  isSubmitted 
   ? 'Выполняется...'
    : buttonText
     

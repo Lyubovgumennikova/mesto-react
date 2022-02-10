@@ -119,6 +119,7 @@ function App() {
   };
 
   const handleUpdateAvatar = (inputValue) => {
+    setIsSubmitted(true);
     // setIsLoading(true);
     api
       .setUserAvatar(inputValue)
@@ -131,11 +132,13 @@ function App() {
       })
       .finally(() => {
         setInputValue('')
+        setIsSubmitted(false);
         setIsLoading(false);
       });
   };
 
   const handleAddPlaceSubmit = (inputValue) => {
+    setIsSubmitted(true);
     api
       .addNewCard(inputValue)
       .then((newCard) => {
@@ -147,6 +150,7 @@ function App() {
       })
       .finally(() => {
         // setInputValue('')
+        setIsSubmitted(false);
         // setIsLoading(false);
       });
   };
@@ -154,6 +158,7 @@ function App() {
   
 
   function handleCardDelete(data) {
+    setIsSubmitted(true);
     api
       .deleteCard(data._id)
       .then(() => {
@@ -197,6 +202,7 @@ function App() {
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
+          isSubmitted={isSubmitted}
           // isLoading={isLoading}
         />
 
@@ -204,6 +210,7 @@ function App() {
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
+          isSubmitted={isSubmitted}
           // isLoading={isLoading}
         />
         <EditAvatarPopup
@@ -212,12 +219,14 @@ function App() {
           onUpdateAvatar={handleUpdateAvatar}
           isSubmitted={isSubmitted}
           isLoading={isLoading}
+          
         />
         <DeleteCardPopup
           isOpen={isDeleteCardPopup}
           card={selectedCard}
           onCardDelete={handleCardDelete}
           onClose={closeAllPopups}
+          isSubmitted={isSubmitted}
           // isLoading={isLoading}
         />
 

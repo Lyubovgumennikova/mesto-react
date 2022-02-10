@@ -3,13 +3,14 @@ import Form from "./Form";
 import Input from "./Input";
 import PopupWithForm from "./PopupWithForm";
 
-function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
+function AddPlacePopup({ isOpen, onClose, onAddPlace, setIsSubmitted }) {
   const [name, setName] = useState("");
   const [link, setLink] = useState("");
   
 
   function handleSubmit(e) {
     e.preventDefault();
+    setIsSubmitted(true);
     onAddPlace({
       name, //: inputValue.name,
       link, //: inputValue.link,
