@@ -4,7 +4,7 @@ import Form from "./Form";
 import Input from "./Input";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-function EditProfilePopup({ isOpen, onClose, onUpdateUser, setIsSubmitted }) {
+function EditProfilePopup({ isOpen, onClose, onUpdateUser, setIsLoading }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
@@ -15,19 +15,11 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, setIsSubmitted }) {
     setDescription(currentUser.about);
   }, [currentUser]);
 
-  // function handleNameChange(e) {
-  //   setName(e.target.value);
-  // }
-
-  // function handleDescriptionChange(e) {
-  //   setDescription(e.target.value);
-  // }
-
   function handleSubmit(e) {
     // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
-    setIsSubmitted(true);
-    // setIsLoading(true)
+
+    setIsLoading(true);
     // Передаём значения управляемых компонентов во внешний обработчик
     onUpdateUser({
       name,
@@ -41,7 +33,6 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, setIsSubmitted }) {
       title="Редактировать профиль"
       isOpen={isOpen}
       onClose={onClose}
-      // onUpdateUser={handleUpdateUser}
     >
       <Form name="edit" buttonText="Сохранить" onSubmit={handleSubmit}>
         <Input
@@ -49,8 +40,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, setIsSubmitted }) {
           name="nik"
           placeholder="Имя"
           maxLength="40"
-          value={ name || ''}
-          // value={currentUser.name}
+          value={name || ""}
           handleChange={setName}
         />
         <span id="nik-error" className="popup__input-error"></span>
@@ -59,7 +49,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, setIsSubmitted }) {
           name="job"
           placeholder="Занятие"
           maxLength="200"
-          value={description || ''}
+          value={description || ""}
           handleChange={setDescription}
         />
         <span id="job-error" className="popup__input-error"></span>

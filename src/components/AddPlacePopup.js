@@ -10,10 +10,10 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, setIsSubmitted }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setIsSubmitted(true);
+    // setIsSubmitted(true);
     onAddPlace({
-      name, //: inputValue.name,
-      link, //: inputValue.link,
+      name, 
+      link, 
     });
   }
 
@@ -21,9 +21,6 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, setIsSubmitted }) {
     const data = ["name", "link"];
     setName(data.name);
     setLink(data.link);
-    // setInputValue(data)
-    // setIsValid(fieldsEnumeration(false));
-    // setValidationMessage(fieldsEnumeration(""));
   }, [isOpen]);
 
   return (
@@ -47,8 +44,6 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, setIsSubmitted }) {
           type="url"
           name="link"
           placeholder="Ссылка на картинку"
-          // value={inputValue.link}
-          // onChange={handleInputChange}
           handleChange={setLink}
         />
         <span id="link-error" className="popup__input-error"></span>
