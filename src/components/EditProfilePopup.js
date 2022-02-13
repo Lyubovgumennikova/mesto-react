@@ -3,7 +3,13 @@ import PopupWithForm from "./PopupWithForm";
 import Input from "./Input";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-function EditProfilePopup({ isOpen, onClose, onUpdateUser, isSubmitted, setIsSubmitted }) {
+function EditProfilePopup({
+  isOpen,
+  onClose,
+  onUpdateUser,
+  isSubmitted,
+  setIsSubmitted,
+}) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
@@ -16,9 +22,8 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, isSubmitted, setIsSub
 
   function handleSubmit(e) {
     // Запрещаем браузеру переходить по адресу формы
-    // e.preventDefault();
-
-    // setIsSubmitted(true);
+    e.preventDefault();
+    setIsSubmitted(true);
     // Передаём значения управляемых компонентов во внешний обработчик
     onUpdateUser({
       name,
@@ -31,11 +36,10 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, isSubmitted, setIsSub
       name="edit"
       title="Редактировать профиль"
       buttonText="Сохранить"
-      handleSubmit={handleSubmit}
+      // handleSubmit={handleSubmit}
       setIsSubmitted={setIsSubmitted}
       isSubmitted={isSubmitted}
-      // onSubmit={handleSubmit}
-      onUpdateUser={onUpdateUser}
+      onSubmit={handleSubmit}
       isOpen={isOpen}
       onClose={onClose}
     >

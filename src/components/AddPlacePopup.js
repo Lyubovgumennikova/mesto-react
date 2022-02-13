@@ -8,19 +8,17 @@ function AddPlacePopup({
   onAddPlace,
   isSubmitted,
   setIsSubmitted,
-  // handleChange,
-  value,
 }) {
   const [name, setName] = useState("");
   const [link, setLink] = useState("");
 
   function handleSubmit(e) {
-    // e.preventDefault();
-    // setIsSubmitted(true);
+    e.preventDefault();
+    setIsSubmitted(true);
     
-    onAddPlace = ({
-      name,
-      link
+    onAddPlace({ 
+      name,  
+      link,  
     });
   }
 
@@ -34,15 +32,9 @@ function AddPlacePopup({
       name="new-card"
       title="Новое место"
       buttonText="Добавить"
-      // onAddPlace={handleSubmit}
-      handleSubmit={handleSubmit}
-      // handleSubmit={onAddPlace}
-      // onSubmit={handleSubmit}
-      onAddPlace={onAddPlace}
-      // handleChange={handleChange}
-      // onAddPlace={onAddPlace}
       isSubmitted={isSubmitted}
       setIsSubmitted={setIsSubmitted}
+      onSubmit={handleSubmit}
       isOpen={isOpen}
       onClose={onClose}
     >
@@ -60,7 +52,7 @@ function AddPlacePopup({
         name="link"
         placeholder="Ссылка на картинку"
         handleChange={setLink}
-        value={value}
+        value={link}
       />
       <span id="link-error" className="popup__input-error"></span>
     </PopupWithForm>

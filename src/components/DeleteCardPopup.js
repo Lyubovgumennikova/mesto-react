@@ -10,10 +10,9 @@ function DeleteCardPopup({
   isSubmitted
 }) {
   const handleSubmit = (e) => {
-    // e.preventDefault();
-    // setIsSubmitted(true)
+    e.preventDefault();
+    setIsSubmitted(true)
     onCardDelete(card);
-    // setIsSubmitted(false)
   };
 
   return (
@@ -21,9 +20,9 @@ function DeleteCardPopup({
       name="delete"
       title="Вы уверены?"
       buttonText="Да"
-      handleSubmit={handleSubmit}
+      // handleSubmit={handleSubmit}
       setIsSubmitted={setIsSubmitted}
-      // onSubmit={handleSubmit}
+      onSubmit={handleSubmit}
       isSubmitted={isSubmitted}
       isOpen={isOpen}
       onClose={onClose}

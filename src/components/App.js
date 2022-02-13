@@ -19,8 +19,7 @@ function App() {
   const [isImagePopupOpen, setImagePopupOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [inputValue, setInputValue] = useState("");
+   // const [inputValue, setInputValue] = useState("");
   const [isSubmitted, setIsSubmitted] = useState (false);
 
   const handleEditAvatarClick = () => {
@@ -82,7 +81,7 @@ function App() {
         closeAllPopups();
       })
       .catch((err) => {
-        console.log(`${err}`);
+        console.log(`${err}`);  
       })
       .finally(() => {
         setIsSubmitted(false)
@@ -162,7 +161,6 @@ function App() {
           onUpdateUser={handleUpdateUser}
           isSubmitted={isSubmitted}
           setIsSubmitted={setIsSubmitted}
-          // setIsLoading={setIsLoading}
         />
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
@@ -170,16 +168,13 @@ function App() {
           onAddPlace={handleAddPlaceSubmit}
           isSubmitted={isSubmitted}
           setIsSubmitted={setIsSubmitted}
-          // onAddPlace={onAddPlace}
-          // isLoading={isLoading}
-          // setIsLoading={setIsLoading}
         />
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
           setIsSubmitted={setIsSubmitted}
-          // setIsLoading={setIsLoading}
+          isSubmitted={isSubmitted}
         />
         <DeleteCardPopup
           isOpen={isDeleteCardPopup}
@@ -188,8 +183,6 @@ function App() {
           onClose={closeAllPopups}
           isSubmitted={isSubmitted}
           setIsSubmitted={setIsSubmitted}
-          // isLoading={isLoading}
-          // setIsLoading={setIsLoading}
         />
         <ImagePopup
           onCardClick={isImagePopupOpen}
