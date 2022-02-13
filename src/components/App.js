@@ -19,8 +19,9 @@ function App() {
   const [isImagePopupOpen, setImagePopupOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   // const [inputValue, setInputValue] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState (false);
 
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
@@ -55,7 +56,7 @@ function App() {
   };
 
   const handleUpdateUser = (userInfo) => {
-    setIsLoading(true);
+    // setIsLoading(true);
     api
       .setUserInfo(userInfo)
       .then((userData) => {
@@ -66,14 +67,14 @@ function App() {
         console.log(`${err}`);
       })
       .finally(() => {
-        setIsLoading(false);
+        setIsSubmitted(false)
         // setInputValue('')
         // renderLoading(false);
       });
   };
 
   const handleUpdateAvatar = (inputValue) => {
-    setIsLoading(true);
+    // setIsLoading(true);
     api
       .setUserAvatar(inputValue)
       .then((avatar) => {
@@ -84,13 +85,14 @@ function App() {
         console.log(`${err}`);
       })
       .finally(() => {
-        setIsLoading(false);
+        setIsSubmitted(false)
       });
   };
 
   const handleAddPlaceSubmit = (inputValue) => {
-    setIsLoading(true);
-    api
+    // setIsSubmitted(true);
+    // handleSubmit: (onAddPlace) => {
+      api
       .addNewCard(inputValue)
       .then((newCard) => {
         setCards([newCard, ...cards]);
@@ -100,12 +102,14 @@ function App() {
         console.log(`${err}`);
       })
       .finally(() => {
-        setIsLoading(false);
+        setIsSubmitted(false);
       });
+    // }
+    
   };
 
   function handleCardDelete(data) {
-    setIsLoading(true);
+    // setIsLoading(true);
     api
       .deleteCard(data._id)
       .then(() => {
@@ -115,7 +119,7 @@ function App() {
       })
       .catch((err) => console.log(err))
       .finally(() => {
-        setIsLoading(false);
+        setIsSubmitted(false)
       });
   }
 
@@ -125,7 +129,7 @@ function App() {
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
       setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
-    });
+    }).catch((err) => console.log(err))
   }
 
   useEffect(() => {
@@ -156,26 +160,36 @@ function App() {
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
-          setIsLoading={setIsLoading}
+          isSubmitted={isSubmitted}
+          setIsSubmitted={setIsSubmitted}
+          // setIsLoading={setIsLoading}
         />
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
-          setIsLoading={setIsLoading}
+          isSubmitted={isSubmitted}
+          setIsSubmitted={setIsSubmitted}
+          // onAddPlace={onAddPlace}
+          // isLoading={isLoading}
+          // setIsLoading={setIsLoading}
         />
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
-          setIsLoading={setIsLoading}
+          setIsSubmitted={setIsSubmitted}
+          // setIsLoading={setIsLoading}
         />
         <DeleteCardPopup
           isOpen={isDeleteCardPopup}
           card={selectedCard}
           onCardDelete={handleCardDelete}
           onClose={closeAllPopups}
-          setIsLoading={setIsLoading}
+          isSubmitted={isSubmitted}
+          setIsSubmitted={setIsSubmitted}
+          // isLoading={isLoading}
+          // setIsLoading={setIsLoading}
         />
         <ImagePopup
           onCardClick={isImagePopupOpen}

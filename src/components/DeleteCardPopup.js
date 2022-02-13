@@ -1,28 +1,33 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
-import Form from "./Form";
 
 function DeleteCardPopup({
   card,
   isOpen,
   onClose,
   onCardDelete,
-  setIsLoading,
+  setIsSubmitted,
+  isSubmitted
 }) {
   const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsLoading(true);
+    // e.preventDefault();
+    // setIsSubmitted(true)
     onCardDelete(card);
+    // setIsSubmitted(false)
   };
 
   return (
     <PopupWithForm
       name="delete"
       title="Вы уверены?"
+      buttonText="Да"
+      handleSubmit={handleSubmit}
+      setIsSubmitted={setIsSubmitted}
+      // onSubmit={handleSubmit}
+      isSubmitted={isSubmitted}
       isOpen={isOpen}
       onClose={onClose}
     >
-      <Form name="delete" buttonText="Да" onSubmit={handleSubmit} />
     </PopupWithForm>
   );
 }
