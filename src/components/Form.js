@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Form({
   name,
@@ -8,7 +8,7 @@ function Form({
   onSubmit,
   // ...props
 }) {
-  // const [isSubmitted, setIsSubmitted] = useState (false);
+  const [isValid, setIsValid] = useState ('');
   // function handleFormSubmit (e) {
   //   // Запрещаем браузеру переходить по адресу формы
   //   e.preventDefault();
@@ -17,9 +17,13 @@ function Form({
   // }
   
   return (
-    <form name={name} className="popup__content" onSubmit={onSubmit}>
+    <form name={name} className="popup__content" onSubmit={onSubmit} > 
       {children}
-      <button type="submit" className="popup__submit-button">
+      <button type="submit" className= {`${
+            isValid
+              ? `popup__submit-button`
+              : `popup__submit-button popup__submit-button_disabled`
+          }`} >
         {isSubmitted ? "Выполняется..." : buttonText}
       </button>
       )
@@ -28,3 +32,4 @@ function Form({
 }
 
 export default Form;
+//noValidate

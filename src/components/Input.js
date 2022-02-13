@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function Input ({ type, placeholder, name, maxLength, handleChange,inputRef, ...props}) {
+  const [validationMessage, setValidationMessage] = useState ("");
+
+  useEffect(() => {
+    // setInputValue(fieldsEnumeration(""));
+    // setIsValid(fieldsEnumeration(false));
+    setValidationMessage("");
+  }, [setValidationMessage]);
+
+
   return (
     <input
       type={type}
       placeholder={placeholder}
       id={name}
-      className="popup__input popup__input_prof_name"
+      className= {`${
+        validationMessage
+          ? `popup__input popup__input_prof_name `
+          : `popup__input popup__input_prof_name popup__input_type_error`
+      }`}
       minLength="2"
       maxLength={maxLength}
       // onChange={onChange}

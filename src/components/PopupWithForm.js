@@ -12,6 +12,7 @@ function PopupWithForm({
   buttonText,
   isSubmitted
 }) {
+  // const [validationMessage, setValidationMessage] = useState ("");
   
   return (
     <Popup isOpen={isOpen} name={name} onClose={onClose}>
