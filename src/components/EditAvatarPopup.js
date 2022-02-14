@@ -1,6 +1,6 @@
 import React, { useEffect, useRef} from "react";
 import PopupWithForm from "./PopupWithForm";
-import Input from "./Input";
+// import Input from "./Input";
 
 function EditAvatarPopup({
   isOpen,
@@ -35,13 +35,12 @@ function EditAvatarPopup({
       isOpen={isOpen}
       onClose={onClose}
     >
-      <Input
-        inputRef={avatarInputRef}
+      <input
+        className="popup__input"
+        ref={avatarInputRef}
         type="url"
         name="avatar"
         placeholder="Ссылка на изображение"
-        // handleChange={setValue}
-        // value={value}
       />
       <span id="avatar-error" className="popup__input-error"></span>
     </PopupWithForm>

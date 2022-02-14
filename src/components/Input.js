@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function Input ({ type, placeholder, name, maxLength, handleChange,inputRef, ...props}) {
+function Input ({ type, placeholder, name, maxLength, handleChange, ...props}) {
   const [validationMessage, setValidationMessage] = useState ("");
 
   useEffect(() => {
@@ -25,7 +25,7 @@ function Input ({ type, placeholder, name, maxLength, handleChange,inputRef, ...
       // onChange={onChange}
       onChange={e => handleChange(e.target.value)}
       value={props.value}
-      ref={inputRef}
+      // ref={inputRef}
       required
     />
   );
